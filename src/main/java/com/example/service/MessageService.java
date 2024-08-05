@@ -40,4 +40,13 @@ public class MessageService {
         } 
         return null;
     }
+
+    public Integer deleteMessageById(int id) {
+        Optional<Message> oMessage = messageRepository.findById(id);
+        if (oMessage.isPresent()) {
+            messageRepository.deleteById(id);
+            return 1;
+        } 
+        return 0;
+    }
 }
