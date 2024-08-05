@@ -36,8 +36,8 @@ public class SocialMediaController {
     }
 
     @PostMapping("/register")
-    public Account register (@RequestBody Account newAccount){
-        return accountService.register(newAccount);
+    public ResponseEntity<Account> register (@RequestBody Account newAccount){
+           return new ResponseEntity<>(accountService.register(newAccount), HttpStatus.OK); 
     }
     
 

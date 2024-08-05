@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.repository.AccountRepository;
 import com.example.entity.Account;
+import com.example.exception.AccountAlreadyExistsException;
 
 @Service
 public class AccountService {
@@ -16,6 +17,15 @@ public class AccountService {
     }
 
     public Account register (Account newUser) {
-        return accountRepository.save(newUser);
+        Account check = accountRepository.findAccountByUsername(newUser.getUsername());
+        System.out.println(check);
+        if(check == null && newUser.getUsername().length() > 0 && newUser.getPassword().length() >= 4) {
+            return accountRepository.save(newUser);
+        } 
+        if (check != null) {
+            throw new AccountAlreadyExistsException("Account with username already exists!");
+        }
+        return null;
     }
+        
 }
