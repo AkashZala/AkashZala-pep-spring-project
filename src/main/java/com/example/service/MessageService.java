@@ -49,4 +49,20 @@ public class MessageService {
         } 
         return 0;
     }
+
+    public Integer updateMessage(int messageId, Message messageText) {
+        Optional<Message> oMessage = messageRepository.findById(messageId);
+        if (oMessage.isPresent() && messageText.getMessageText().trim().length() > 0 && messageText.getMessageText().length() < 255) {
+            Message message = oMessage.get();
+            message.setMessageText(messageText.getMessageText());
+            messageRepository.save(message);
+            return 1;
+        } else {
+            return 0;
+        }
+    }
+
+    public List<Message> findMessagesByAccount(int accountId) {
+        return messageRepository.findAllMessagesByPostedBy(accountId);
+    }
 }
