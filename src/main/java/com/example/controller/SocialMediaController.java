@@ -19,6 +19,7 @@ import com.example.service.AccountService;
 import com.example.service.MessageService;
 
 import java.util.Optional;
+import java.util.List;
 
 /**
  * TODO: You will need to write your own endpoints and handlers for your controller using Spring. The endpoints you will need can be
@@ -57,5 +58,9 @@ public class SocialMediaController {
         return new ResponseEntity<>(messageService.createMessage(newMessage), HttpStatus.OK);
     }
     
+    @GetMapping("/messages") 
+    public ResponseEntity<List> getAllMessages(){
+        return new ResponseEntity<>(messageService.findAllMessages(), HttpStatus.OK);
+    }
 
 }
