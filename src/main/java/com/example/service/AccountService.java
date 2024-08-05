@@ -1,5 +1,7 @@
 package com.example.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -35,6 +37,10 @@ public class AccountService {
         } else {
             throw new InvalidCredentialsExpection("Username and Password Combination do not match and existing users!");
         }
+    }
+
+    public Optional<Account> findAccountById (int id) {
+        return accountRepository.findById(id);
     }
         
 }
