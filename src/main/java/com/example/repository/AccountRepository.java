@@ -9,4 +9,7 @@ import com.example.entity.Account;
 public interface AccountRepository extends JpaRepository<Account, Integer> {
     @Query("SELECT a FROM Account a WHERE a.username = ?1")
     Account findAccountByUsername(String username);
+
+    @Query("SELECT a FROM Account a WHERE a.username = ?1 AND a.password = ?2")
+    Account findAccountByUsernameAndPassword (String username, String password);
 }
